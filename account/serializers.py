@@ -21,3 +21,19 @@ class UserCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class ListUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+        )
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+
+        return response
+    
+    

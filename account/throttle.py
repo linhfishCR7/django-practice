@@ -1,14 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework.throttling import SimpleRateThrottle
-
 from account.helpers import verify_recaptcha
-
 
 class UserLoginRateThrottle(SimpleRateThrottle):
     scope = 'loginAttempts'
 
     def get_cache_key(self, request, view):
-        user = User.objects.filter(email=request.data.get('email'))
+        user = User.objects.filter(username=request.data.get('username'))
         ident = user[0].pk if user else self.get_ident(request)
 
         return self.cache_format % {

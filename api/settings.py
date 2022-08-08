@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'muilti_lang',
     'tests',
     'test_run_migrate',
-    'account'
+    'account',
+    'whatever',
 ]
 
 MIDDLEWARE = [

@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from muilti_lang import views
 from account.views import demo_recaptcha
+from whatever.api import WhateverResource
+whatever_resource = WhateverResource()
 # urlpatterns = i18n_patterns(
 #     path('admin/', admin.site.urls),
 #     # path('api/', include('muilti_lang.urls'), name='muilti_lang'),
@@ -25,6 +27,7 @@ from account.views import demo_recaptcha
 
 # )
 urlpatterns = [
-   path('auth/', include('account.urls'), name='auth'),
+   path('api/auth/', include('account.urls'), name='auth'),
    path('demo-recaptcha/', demo_recaptcha, name="demo"),
+   path('api/', include(whatever_resource.urls)),
 ]
