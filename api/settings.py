@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'test_run_migrate',
     'account',
     'whatever',
+    'puppies',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -75,17 +77,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api.wsgi.application'
+ASGI_APPLICATION = 'api.routing.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': (
@@ -97,25 +100,28 @@ REST_FRAMEWORK = {
         'user': '1000/minute',
         'loginAttempts': '3/hr',
 
-    }
+    },
+
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'book_store',
-#         'USER': 'postgres',
-#         'PASSWORD': '123456789',
-#         'HOST': '127.0.0.1',
-#         # 'HOST': 'localhost',
-#         'PORT': '5432',
-#         'OPTIONS': {
-#             'client_encoding': 'UTF-8'  # Need to set when create new MySQL database
-#         },
-#     },
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'book_store',
+        'USER': 'postgres',
+        'PASSWORD': '123456789',
+        'HOST': '127.0.0.1',
+        # 'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {
+            'client_encoding': 'UTF-8'  # Need to set when create new MySQL database
+        },
+    },
+}
 
 
 # Password validation
@@ -198,3 +204,12 @@ LOGGING = {
 RE_CAPTCHA_SECRET_KEY='6LdsEVIhAAAAAGphAu69a2Nn9lZaLONasI16f57T'
 RE_CAPTCHA_SITE_KEY='6LdsEVIhAAAAAPACl3ioWSqyhy_2Cli0O0C4LJLR'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'api.routing.channel_routing',
+    }
+}

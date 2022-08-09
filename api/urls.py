@@ -30,4 +30,5 @@ urlpatterns = [
    path('api/auth/', include('account.urls'), name='auth'),
    path('demo-recaptcha/', demo_recaptcha, name="demo"),
    path('api/', include(whatever_resource.urls)),
+   path('api/', include('puppies.urls')),
 ]
