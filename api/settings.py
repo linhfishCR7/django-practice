@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'account',
     'whatever',
     'puppies',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api.wsgi.application'
-ASGI_APPLICATION = 'api.routing.application'
 
 
 # Database
@@ -203,13 +201,3 @@ LOGGING = {
 
 RE_CAPTCHA_SECRET_KEY='6LdsEVIhAAAAAGphAu69a2Nn9lZaLONasI16f57T'
 RE_CAPTCHA_SITE_KEY='6LdsEVIhAAAAAPACl3ioWSqyhy_2Cli0O0C4LJLR'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('localhost', 6379)],
-        },
-        'ROUTING': 'api.routing.channel_routing',
-    }
-}
